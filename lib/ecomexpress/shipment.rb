@@ -17,6 +17,7 @@ module Ecomexpress
 	if @services[:shipment_method] == true 
             #'https://api.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
             'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+	end
       else
         #'http://netconnect.ecomexpress.com/Ver1.8/Demo/ShippingAPI/WayBill/WayBillGeneration.svc'
         'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'

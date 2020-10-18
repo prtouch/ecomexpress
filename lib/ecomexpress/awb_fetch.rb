@@ -10,7 +10,8 @@ module Ecomexpress
       if @mode == 'prod'
         #'http://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/Finder/ServiceFinderQuery.svc'
         #'http://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/Finder/ServiceFinderQuery.svc'
-        'https://api.ecomexpress.in/apiv2/fetch_awb/'
+        #'https://api.ecomexpress.in/apiv2/fetch_awb/'
+        'https://clbeta.ecomexpress.in/apiv2/fetch_awb/'
       else
         'https://clbeta.ecomexpress.in/apiv2/fetch_awb/'
       end

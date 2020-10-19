@@ -11,7 +11,7 @@ module Ecomexpress
         #'http://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/Finder/ServiceFinderQuery.svc'
         #'http://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/Finder/ServiceFinderQuery.svc'
         #'https://api.ecomexpress.in/apiv2/pincode/'
-        'https://clbeta.ecomexpress.in/apiv2/pincode/'
+        'https://api.ecomexpress.in/apiv2/pincode/'
       else
         'https://clbeta.ecomexpress.in/apiv2/pincode/'
       end

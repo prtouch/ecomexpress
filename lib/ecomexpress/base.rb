@@ -386,6 +386,7 @@ module Ecomexpress
     # Returns Hash
     def request(url, body)
       #res = HTTParty.post(url, body: body, headers: {'Content-Type' => 'application/soap+xml; charset="utf-8"'}, :verify => false)
+      p url
       res = HTTParty.post(url, body: body, headers: {'Content-Type' => 'application/soap+xml; charset="utf-8"'}, :verify => false)
       p "response is: #{res}. response body is: #{res.body} for url: #{url}"
       content = JSON.parse(res.body)

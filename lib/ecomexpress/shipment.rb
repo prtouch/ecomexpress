@@ -8,30 +8,46 @@ module Ecomexpress
       @mode = details[:mode]
     end
 
+
     def request_url
       if @mode == 'prod'
-        #'https://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/WayBill/WayBillGeneration.svc'
-        #'https://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/WayBill/WayBillGeneration.svc'
-        #'https://api.ecomexpress.in/apiv2/manifest_awb/'
-        'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
-	if @services[:shipment_method] == true 
-            #'https://api.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
-            'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+        if @services[:shipment_method] == "PICKUP" 
+            'https://api.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+	else
+            'https://api.ecomexpress.in/apiv2/manifest_awb/'
 	end
       else
-        #'http://netconnect.ecomexpress.com/Ver1.8/Demo/ShippingAPI/WayBill/WayBillGeneration.svc'
-        'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
-	if @services[:shipment_method] == true 
+        if @services[:shipment_method] == "PICKUP" 
             'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+	else
+            'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
 	end
       end
     end
+
+
+#   def request_url
+#     if @mode == 'prod'
+#       'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
+#       if @services[:shipment_method] == true 
+#           #'https://api.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+#           'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+#       end
+#     else
+#       'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
+#       if @services[:shipment_method] == true 
+#           'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+#       end
+#     end
+#   end
 
     def response
       wsa = 'http://tempuri.org/IWayBillGeneration/GenerateWayBill'
       # TODO: ITS A HACK NEEDS TO BE REMOVED
       # TODO: NEED TO REWRITE TO USE NAMESPACES DEFINED IN NAMESPACES FUNCTION
       params = {'Request' => {'ns4:Consignee' => @consignee, 'ns4:Services' => @services, 'ns4:Shipper' => @shipper}}
+      p "request_url"
+      p request_url
       opts = {message: 'GenerateWayBill', wsa: wsa, params: params, extra: {'Profile' => @profile}, url: request_url}
       make_request(opts, "shipment")
     end

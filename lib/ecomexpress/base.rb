@@ -179,7 +179,13 @@ module Ecomexpress
 
 
     def request_data_shipment(opts)
-      awb_request = {type: "ppd", count: 1, mode: 'development', creds: {license_key: opts[:extra]["Profile"][:license_key], login_id: opts[:extra]["Profile"][:login_id]}}
+      if opts[:params]["Request"]["ns4:Services"]["sub_product_code"] == 'C'
+	  product_type = "cod"
+      else
+	  product_type = "ppd"
+      end
+      awb_request = {type: product_type, count: 1, mode: 'development', creds: {license_key: opts[:extra]["Profile"][:license_key], login_id: opts[:extra]["Profile"][:login_id]}}
+
       awb_prepare = Ecomexpress::AwbFetch.new(awb_request)
       awb = awb_prepare.response
       puts "===="
@@ -240,7 +246,7 @@ module Ecomexpress
           a = [{
             "AWB_NUMBER": awb.to_s,
             "ORDER_NUMBER": opts[:params]["Request"]["ns4:Services"]["InvoiceNo"],
-            "PRODUCT": "PPD",
+	    "PRODUCT": product_type.to_s,
             "CONSIGNEE": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeName"],
             "CONSIGNEE_ADDRESS1": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeAddress1"],
             "CONSIGNEE_ADDRESS2": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeAddress2"],

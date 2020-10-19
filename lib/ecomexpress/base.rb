@@ -334,8 +334,9 @@ module Ecomexpress
 
     def response_return_shipment(response, message)
       response_hash = {error: false, error_text: ''}
-      if response["success"] == "yes"
-	  response_hash["awb"] = response["awb"][0]
+      if response["shipments"][0]["success"] == true
+          p response["shipments"][0]["awb"]
+	  response_hash["awb"] = response["shipments"][0]["awb"]
       end
     end
 

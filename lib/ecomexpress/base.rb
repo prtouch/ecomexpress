@@ -179,7 +179,7 @@ module Ecomexpress
 
 
     def request_data_shipment(opts)
-      if opts[:params]["Request"]["ns4:Services"]["sub_product_code"] == 'C'
+      if opts[:params]["Request"]["ns4:Services"]["SubProductCode"] == 'C'
 	  product_type = "cod"
       else
 	  product_type = "ppd"
@@ -188,19 +188,12 @@ module Ecomexpress
 
       awb_prepare = Ecomexpress::AwbFetch.new(awb_request)
       awb = awb_prepare.response
-      puts "===="
-      puts opts[:params]["Request"]["ns4:Consignee"]
-      puts opts[:params]["Request"]["ns4:Services"]
-      puts opts[:params]["Request"]["ns4:Shipper"]
-      puts "$$$$$$$$$$$$$$$$"
 
       collectable_value = opts[:params]["Request"]["ns4:Services"]["CollectableAmount"]
       if not collectable_value.is_a? Numeric
 	  collectable_value = 0
       end
 
-      p opts[:params]["Request"]["ns4:Services"]
-      p "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
       if  opts[:params]["Request"]["ns4:Shipper"]["IsReversePickup"] == true
           a = [{
@@ -288,10 +281,8 @@ module Ecomexpress
            #}
             }]
       end
-      p "JSON.dump(a)", JSON.dump(a)
 
       data_pincode = "json_input=" + JSON.dump(a) + "&username="+opts[:extra]["Profile"][:login_id]+"&password="+opts[:extra]["Profile"][:license_key]
-      p "data_pincode", data_pincode
       return data_pincode 
     end
 

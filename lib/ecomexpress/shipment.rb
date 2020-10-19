@@ -89,7 +89,7 @@ module Ecomexpress
     def services_hash(details)
       params = {}
       params['ActualWeight'] = details[:actual_weight]
-      params['CollectableAmount'] = details[:collactable_amount]
+      params['CollectableAmount'] = details[:collectable_amount]
       params['Commodity'] = commodites_hash(details[:commodities])
       params['CreditReferenceNo'] = details[:credit_reference_no]
       params['DeclaredValue'] = details[:declared_value]

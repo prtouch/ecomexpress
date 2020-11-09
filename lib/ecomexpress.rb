@@ -6,6 +6,7 @@ require 'ecomexpress/shipment'
 require 'ecomexpress/tracking'
 require 'ecomexpress/pickup'
 require 'ecomexpress/cancel_pickup'
+require 'ecomexpress/get_packslip'
 
 module Ecomexpress
 end

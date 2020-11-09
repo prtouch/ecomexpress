@@ -69,6 +69,8 @@ module Ecomexpress
       params['OriginArea'] = details[:origin_area]
       params['Sender'] = details[:sender]
       params['VendorCode'] = details[:vendor_code]
+      params['City'] = details[:city]
+      params['State'] = details[:state]
       params
     end
 

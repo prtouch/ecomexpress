@@ -18,9 +18,11 @@ module Ecomexpress
 	end
       else
         if @services[:shipment_method] == "PICKUP" 
-            'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+            #'https://clbeta.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
+            'https://api.ecomexpress.in/apiv2/manifest_awb_rev_v2/'
 	else
-            'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
+            #'https://clbeta.ecomexpress.in/apiv2/manifest_awb/'
+            'https://api.ecomexpress.in/apiv2/manifest_awb/'
 	end
       end
     end

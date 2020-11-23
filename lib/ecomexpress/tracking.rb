@@ -13,7 +13,8 @@ module Ecomexpress
     end
 
     def self.request_url
-      'https://clbeta.ecomexpress.in/track_me/api/mawbd/'
+      #'https://clbeta.ecomexpress.in/track_me/api/mawbd/'
+      'https://plapi.ecomexpress.in/track_me/api/mawbd/'
     end
 
     def request

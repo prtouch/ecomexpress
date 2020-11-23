@@ -13,7 +13,8 @@ module Ecomexpress
         #'https://api.ecomexpress.in/apiv2/fetch_awb/'
         'https://api.ecomexpress.in/apiv2/fetch_awb/'
       else
-        'https://clbeta.ecomexpress.in/apiv2/fetch_awb/'
+        'https://api.ecomexpress.in/apiv2/fetch_awb/'
+        #'https://clbeta.ecomexpress.in/apiv2/fetch_awb/'
       end
     end
 

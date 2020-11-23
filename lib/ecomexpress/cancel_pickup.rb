@@ -8,9 +8,10 @@ module Ecomexpress
 
     def request_url
       if @mode == 'prod'
-        'https://netconnect.ecomexpress.com/Ver1.8/ShippingAPI/Pickup/PickupRegistrationService.svc'
+        'https://api.ecomexpress.in/apiv2/cancel_awb/'
       else
-        'https://netconnect.ecomexpress.com/Ver1.8/Demo/ShippingAPI/Pickup/PickupRegistrationService.svc'
+        #'https://clbeta.ecomexpress.in/apiv2/cancel_awb/'
+        'https://api.ecomexpress.in/apiv2/cancel_awb/'
       end
     end
 

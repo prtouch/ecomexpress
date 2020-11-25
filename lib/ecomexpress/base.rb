@@ -190,10 +190,15 @@ module Ecomexpress
       awb = awb_prepare.response
 
       collectable_value = opts[:params]["Request"]["ns4:Services"]["CollectableAmount"]
+      p '===========collectable_value'
+      p collectable_value
+      p '===========collectable_value'
       if not collectable_value.is_a? Numeric
 	  collectable_value = 0
       end
 
+      p collectable_value
+      p '===========collectable_value'
 
       if  opts[:params]["Request"]["ns4:Shipper"]["IsReversePickup"] == true
           a = [{

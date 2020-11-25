@@ -189,11 +189,11 @@ module Ecomexpress
       awb_prepare = Ecomexpress::AwbFetch.new(awb_request)
       awb = awb_prepare.response
 
-      collectable_value = opts[:params]["Request"]["ns4:Services"]["CollectableAmount"]
+      collectable_value = opts[:params]["Request"]["ns4:Services"]["CollectableAmount"].to_i
       p '===========collectable_value'
       p collectable_value
       p '===========collectable_value'
-      if not collectable_value.is_a? Numeric
+      if not collectable_value.to_i? Numeric
 	  collectable_value = 0
       end
 

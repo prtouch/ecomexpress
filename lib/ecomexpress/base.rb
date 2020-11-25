@@ -288,6 +288,7 @@ module Ecomexpress
       end
 
       data_pincode = "json_input=" + JSON.dump(a) + "&username="+opts[:extra]["Profile"][:login_id]+"&password="+opts[:extra]["Profile"][:license_key]
+      p data_pincode
       return data_pincode 
     end
 

@@ -251,7 +251,7 @@ module Ecomexpress
             "CONSIGNEE_ADDRESS3": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeAddress3"],
             "DESTINATION_CITY": opts[:params]["Request"]["ns4:Consignee"]["City"],
             "PINCODE": opts[:params]["Request"]["ns4:Consignee"]["ConsigneePincode"].to_s,
-            "REVPICKUP_STATE": opts[:params]["Request"]["ns4:Consignee"]["State"],
+            "STATE": opts[:params]["Request"]["ns4:Consignee"]["State"],
             "MOBILE": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeMobile"].to_s,
             "TELEPHONE": opts[:params]["Request"]["ns4:Consignee"]["ConsigneeTelephone"].to_s,
             "ITEM_DESCRIPTION": opts[:params]["Request"]["ns4:Services"]["Commodity"]["CommodityDetail1"],

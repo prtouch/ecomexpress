@@ -193,9 +193,9 @@ module Ecomexpress
       p '===========collectable_value'
       p collectable_value
       p '===========collectable_value'
-      if not collectable_value.to_i? Numeric
-	  collectable_value = 0
-      end
+     #if not collectable_value.to_i? Numeric
+     #    collectable_value = 0
+     #end
 
       p collectable_value
       p '===========collectable_value'

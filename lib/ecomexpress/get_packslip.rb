@@ -13,10 +13,15 @@ require 'prawn-svg'
 module Ecomexpress
   class GetPackslip < Base
     def initialize(details, awb_no)
+      p "@awb_no"
       @awb_no = awb_no 
+      p "@shipper"
       @shipper = shipper_hash(details[:shipper_details])
+      p "@consignee"
       @consignee = consignee_hash(details[:consignee_details])
+      p "@services"
       @services = services_hash(details[:services])
+      p "@profile"
       @profile = profile_hash({api_type: 'S', version: '1.3'}, details[:creds])
       @mode = details[:mode]
     end

@@ -38,6 +38,7 @@ module Ecomexpress
 #   end
 
     def generate_packslip
+      p "generate_packslip start"
       receipt_pdf = Prawn::Document.new
       product_type = ""
       if @services['SubProductCode'] == "C" 
@@ -50,6 +51,9 @@ module Ecomexpress
           product_type = "[REV]"
       end
 
+
+
+      p "Barby start"
       barcode = Barby::Code128.new(@awb_no)
       #File.open('/tmp/barcode'+ @awb_no +'.svg', 'w'){|f| f.write barcode.to_svg(height: 70, width: 260, margin: 0) }
      #File.open('barcode'+ @awb_no +'.png', 'w'){|f| f.write barcode.to_png(height: 70, width: 260, margin: 0) }
@@ -61,6 +65,8 @@ module Ecomexpress
       #image_cells << image_cell(:content => img_file, :dry_run => true, :bound => true, :align => :center)
 
       #table_data_top = [[product_type, 'ECOM EXPRESS', @awb_no]]
+      #
+      p "Table start"
       table_data_top = [[product_type, "ECOM EXPRESS", @awb_no]]
       table_data_shipper_name = [['Shipper : '+ @shipper['CustomerName'], 'order: ' + @services['InvoiceNo']]]
       table_data_consignee = [['Consignee Details', 'Order Details'],
@@ -77,6 +83,7 @@ module Ecomexpress
       customer_address1 = "" 
       customer_address2 = "" 
       customer_address3 = "" 
+      p "CustomerAddress1 start"
       if @shipper['CustomerAddress1']
            customer_address1 = @shipper['CustomerAddress1']
       end
@@ -93,14 +100,17 @@ module Ecomexpress
       #table_data_return_info = [[@shipper['CustomerName'] + ", " + customer_address1 + ", " + customer_address2 + ", " + customer_address3 + @shipper['CustomerPincode']]] 
       table_data_return_info = [[@shipper['CustomerName'] + ", " + customer_address1 + ", " + customer_address2 + ", " + customer_address3 + ", " + @shipper['CustomerPincode']  ]] 
       #receipt_pdf.svg barcode.to_svg, width: 30, height: 50
+      p "SVG start"
       receipt_pdf.svg barcode.to_svg(height: 30, width: 300, margin: 0)
 
+      p "Table write start"
       receipt_pdf.table table_data_top , cell_style: {border_width: 0, width: 150, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
            columns(1).align = :left
            columns(2).align = :center
            columns(-1).align = :right
       end 
 
+      p "table_data_shipper_name write start"
       receipt_pdf.table table_data_shipper_name , cell_style: {border_width: 0, width: 225, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
            rows(0).border_top_width = 1 
            rows(0).border_bottom_width = 1 
@@ -110,6 +120,7 @@ module Ecomexpress
            columns(-1).align = :right
       end 
 
+      p "table_data_consignee write start"
       receipt_pdf.table table_data_consignee , cell_style: {border_width: 0, width: 225, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
            rows(0).border_top_width = 1 
            rows(0).border_bottom_width = 1 
@@ -124,20 +135,25 @@ module Ecomexpress
            rows(-1).border_bottom_width = 1 
       end 
 
+      p "table_data_return_inst write start"
       receipt_pdf.table table_data_return_inst , cell_style: {border_width: 1, width: 450, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
            columns(1).align = :center
       end 
 
+      p "table_data_return_info write start"
       receipt_pdf.table table_data_return_info , cell_style: {border_width: 1, width: 450, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
            columns(1).align = :left
       end 
 
 
 
+      p "file_write start"
       receipt_pdf.render_file '/tmp/my_pdf_file'+ @awb_no  + '.pdf'
       #pdf_data = receipt_pdf.render_to_string
+      p "open file start"
       data = File.open('/tmp/my_pdf_file'+ @awb_no  + '.pdf').read
       #File.delete('/tmp/my_pdf_file'+ @awb_no  + '.pdf') if File.exist?('/tmp/my_pdf_file'+ @awb_no  + '.pdf')
+      p "data file start"
       pdf_data = Base64.encode64(data)
      #decode_base64_content = Base64.decode64(pdf_data)
      #File.open("Output.txt", "wb") do |f|

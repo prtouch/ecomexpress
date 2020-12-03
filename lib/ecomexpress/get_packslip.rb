@@ -72,7 +72,8 @@ module Ecomexpress
       #table_data_top = [[product_type, 'ECOM EXPRESS', @awb_no]]
       #
       p "Table start"
-      table_data_top = [[product_type, "ECOM EXPRESS", @awb_no]]
+      table_awb_top = [[@awb_no]]
+      table_data_top = [[product_type, "ECOM EXPRESS", ""]]
       table_data_shipper_name = [['Shipper : '+ @shipper['CustomerName'], 'order: ' + @services['InvoiceNo']]]
       table_data_consignee = [['Consignee Details', 'Order Details'],
                               [@consignee['ConsigneeName'], 'Item description: ' + @services["Commodity"]["CommodityDetail1"] ],
@@ -106,12 +107,22 @@ module Ecomexpress
       table_data_return_info = [[@shipper['CustomerName'] + ", " + customer_address1 + ", " + customer_address2 + ", " + customer_address3 + ", " + @shipper['CustomerPincode']  ]] 
       #receipt_pdf.svg barcode.to_svg, width: 30, height: 50
       p "SVG start"
-      receipt_pdf.svg barcode.to_svg(height: 30, width: 300, margin: 0)
+      receipt_pdf.table table_awb_top , cell_style: {border_width: 0, width: 450, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
+           rows(0).align = :center 
+      end 
+      receipt_pdf.svg barcode.to_svg(height: 30, width: 300, margin: 0), at: [180,700]
+     #receipt_pdf do
+     #     svg '<svg><rect width="100" height="100" fill="red"></rect></svg>'
+     #end 
 
       p "Table write start"
       receipt_pdf.table table_data_top , cell_style: {border_width: 0, width: 150, padding: [5, 5, 5, 5], text_color: '373737', inline_format: true} do
+          #rows(0).border_top_width = 1 
+          #rows(0).border_bottom_width = 1 
+          #rows(0).border_left_width = 1 
+          #rows(0).border_right_width = 1 
            columns(1).align = :left
-           columns(2).align = :center
+           columns(-2).align = :center
            columns(-1).align = :right
       end 
 
@@ -153,11 +164,11 @@ module Ecomexpress
 
 
       p "file_write start"
-      receipt_pdf.render_file '/tmp/my_pdf_file'+ @awb_no  + '.pdf'
+      receipt_pdf.render_file '/tmp/pdf_file'+ @awb_no  + '.pdf'
       #pdf_data = receipt_pdf.render_to_string
       p "open file start"
-      data = File.open('/tmp/my_pdf_file'+ @awb_no  + '.pdf').read
-      #File.delete('/tmp/my_pdf_file'+ @awb_no  + '.pdf') if File.exist?('/tmp/my_pdf_file'+ @awb_no  + '.pdf')
+      data = File.open('/tmp/pdf_file'+ @awb_no  + '.pdf').read
+      File.delete('/tmp/my_pdf_file'+ @awb_no  + '.pdf') if File.exist?('/tmp/my_pdf_file'+ @awb_no  + '.pdf')
       p "data file start"
       pdf_data = Base64.encode64(data)
      #decode_base64_content = Base64.decode64(pdf_data)
@@ -176,6 +187,7 @@ module Ecomexpress
       params['CustomerAddress2'] = address_array[1]
       params['CustomerAddress3'] = address_array[2]
       params['CustomerCode'] = details[:customer_code]
+      p 'CustomerCode'
       params['CustomerEmailID'] = details[:customer_email_id]
       params['CustomerMobile'] = details[:customer_mobile]
       params['CustomerName'] = details[:customer_name]

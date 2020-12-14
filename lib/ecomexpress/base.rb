@@ -294,6 +294,9 @@ module Ecomexpress
 
 
     def request_data_pincode(opts)
+      p ops[:params][:pinCode]
+      p ops[:extra][:profile][:login_id]
+      p ops[:extra][:profile][:license_key]
       data_pincode = "pincode="+opts[:params][:pinCode].to_s+"&username="+opts[:extra]["profile"][:login_id]+"&password="+opts[:extra]["profile"][:license_key]
       return data_pincode 
     end
